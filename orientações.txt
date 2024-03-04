@@ -1,0 +1,53 @@
+banco de dados: hotelbd
+
+tabela: cliente
+id
+nome
+email
+fone
+
+tabela: funcionario
+id
+nome
+função
+
+tabela: quarto
+id
+numero
+tipo(classe a, comercio, suite)
+valor
+
+tabela:reserva
+id
+idcliente
+idfuncionario
+idquarto
+dataentrada
+datasaida
+situacao(pago, pendente)
+
+tabelas:
+clientes, funcionario, quarto, reserva
+model, controller e view
+
+php artisan make:model Funcionario --controller --migration
+
+php artisan migrate 
+php artisan migrate:fresh
+
+php artisan serve
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
