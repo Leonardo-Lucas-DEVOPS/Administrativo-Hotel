@@ -30,7 +30,44 @@ class ReservaController extends Controller
         return Redirect::to('/');
     }
 
-    public function gerenciarReserva(){
-        return view('gerenciarReserva');
+    public function gerenciarReserva(Request $request){
+       $dadosReserva =Reserva::query();
+       $dadosReserva->when($request->numero, function($query, $valor){
+        $query->where('numeroQuarto', 'like','%'.$valor.'%');
+    });
+    $dadosReserva = $dadosReserva->get();
+
+
+        return view('gerenciarReserva', ['registroReserva'=>$dadosReserva]);
     }
-}
+
+
+    public function destroy(Reserva $id){
+        $id->delete();
+        return Redirect::to('/');
+    }
+
+    public function formAlterarReserva(Reserva $id){
+        return view('formularioAlterReserva', ['registroReserva' => $id]);
+    }
+
+    public function alterarReserva(Reserva $id, Request $request) {
+        $dadosValidos = $request->validate([
+            
+        'idcliente' =>'integer|required',
+        'idfuncionario' =>'integer|required',
+        'numeroquarto' =>'integer|required',
+        'situacao'=>'string|required',
+        'valortotal' =>'integer|required',
+        'dataEntrada' =>'date|required',
+        'dataSaida' =>'date|required' 
+
+
+        ]);
+        $id->fill($dadosValidos);
+        $id->save();
+        return Redirect::to('/');
+   }
+
+
+ }

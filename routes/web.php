@@ -41,4 +41,7 @@ Route::put('/alterar-quarto/{id}', [QuartoController::class, 'alterarQuarto'])->
 Route::get('/cadastro-reserva',[ReservaController::class,'showformularioCadastroReserva']);
 Route::post('/cadastro-reserva', [ReservaController::class,'cadReserva'])->name('envia-db-reserva');
 Route::get('/gerenciar-reserva',[ReservaController::class,'gerenciarReserva']);
+route::get('/alterar-reserva/{id}',[ReservaController::class,'formAlterarReserva'])->name('alterar-reserva');
+route::put('/alterar-reserva/{id}',[ReservaController::class,'alterarReserva'])->name('edit-reserva');
+route::delete('/apagar-reserva/{id}',[ReservaController::class,'destroy'])->name('apagar-reserva');
 

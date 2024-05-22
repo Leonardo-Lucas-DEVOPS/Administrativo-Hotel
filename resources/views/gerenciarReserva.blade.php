@@ -20,29 +20,40 @@
     <thead>
       <tr>
         <th scope="col">Código</th>
-        <th scope="col">Nome</th>
-        <th scope="col">idReserva</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Exluir</th>
+        <th scope="col">situação </th>
+        <th scope="col">valor total</th>
+        <th scope="col">data Entrada</th>
+        <th scope="col">data Saída</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    
+        
       </tr>
     </thead>
     <tbody>
      
+    @foreach($registroReserva as $rrLoop)
       <tr>
-        <th scope="row">01</th>
-        <td>Leonardo</td>
-        <td>10</td>
-        <td>
-          <a href="">
-            <button type="button" class="btn btn-primary">X</button>
-          </a>
+        <th scope="row">{{$rrLoop->id}}</th>
+        <td>{{$rrLoop->situacao}}</td>
+        <td>{{$rrLoop->valortotal}}</td>
+        <td>{{$rrLoop->dataEntrada}}</td>
+        <td>{{$rrLoop->dataSaida}}</td>
+
+        <td>        
+          <a href="{{route('alterar-reserva',$rrLoop->id)}}"><button type="button" class="btn btn-primary">editar</button></a>
         </td>
-        
         <td>
-         xxx
+           <form method="post" action="{{route('apagar-reserva',$rrLoop->id)}}">
+            @method('delete')
+            @csrf
+            <button type="submit" class="btn btn-danger">excluir</button>
+          </form>
         </td>
       </tr>
-   
+    @endforeach
+
+
     </tbody>
   </table>
 </section>
